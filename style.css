@@ -1,0 +1,36 @@
+body {
+    font-size: 20px;
+    background-color: black;
+    color: whitesmoke;
+    margin: 0;
+    margin: 40px auto;
+    max-width: 650px;
+    padding: 0 10px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+h1,
+h2,
+p {
+    text-align: left;
+}
+
+img,
+video,
+iframe,
+audio {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    max-width: 100%;
+} 
+@media (max-width: 600px) {
+    body {
+        font-size: 16px;
+    }
+}
