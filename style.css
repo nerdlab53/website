@@ -8,9 +8,13 @@ body {
     padding: 0 10px;
 }
 /* Dark theme styles */
-body.dark-theme {
+/* body.dark-theme {
     background-color: black;
     color: whitesmoke;
+} */
+body.dark-theme {
+    background-color: #121212; /* Deep gray for a softer dark background */
+    color: #E0E0E0; /* Light gray for text, softer than whitesmoke */
 }
 
 /* Toggle button styles */
