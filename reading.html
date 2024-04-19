@@ -14,27 +14,48 @@
     <h2>>> what i have been reading recently</h2>
     <p>>> papers (click to get paper)</p>
     <ul>
-        <li>// <a href="https://arxiv.org/pdf/2212.14052.pdf">state space models for language modelling</a></li><br>
+        <li>
+            <label for="state-space-models">// <a href="https://arxiv.org/pdf/2212.14052.pdf">state space models for language modelling</a></label>
+            <input type="checkbox" id="state-space-models" name="readPapers" value="state-space-models">
+        </li><br>
         <li>// fine tuning methods:
             <ul>
-                <li>// <a href="https://arxiv.org/pdf/2106.09685.pdf">LoRA (done)</a></li>
-                <li>// <a href="https://arxiv.org/pdf/2402.09353.pdf">DoRA (reading)</a></li>
-                <li>// <a href="https://arxiv.org/pdf/2404.03592.pdf">ReFT (next!)</a></li>
+                <li>
+                    <label for="lora">// <a href="https://arxiv.org/pdf/2106.09685.pdf">LoRA (done)</a></label>
+                    <input type="checkbox" id="lora" name="readPapers" value="lora" checked>
+                </li>
+                <li>
+                    <label for="dora">// <a href="https://arxiv.org/pdf/2402.09353.pdf">DoRA (reading)</a></label>
+                    <input type="checkbox" id="dora" name="readPapers" value="dora">
+                </li>
+                <li>
+                    <label for="reft">// <a href="https://arxiv.org/pdf/2404.03592.pdf">ReFT (next!)</a></label>
+                    <input type="checkbox" id="reft" name="readPapers" value="reft">
+                </li>
             </ul>
         </li><br>
-        <li>// <a href="https://arxiv.org/pdf/2010.11929.pdf">classic ViT paper</a></li><br>
-        <li>// <a href="https://arxiv.org/pdf/2305.14283.pdf">query rewriting for retrieval-augmented large language models</a></li><br>
+        <li>
+            <label for="classic-vit">// <a href="https://arxiv.org/pdf/2010.11929.pdf">classic ViT paper</a></label>
+            <input type="checkbox" id="classic-vit" name="readPapers" value="classic-vit">
+        </li><br>
+        <li>
+            <label for="query-rewriting">// <a href="https://arxiv.org/pdf/2305.14283.pdf">query rewriting for retrieval-augmented large language models</a></label>
+            <input type="checkbox" id="query-rewriting" name="readPapers" value="query-rewriting">
+        </li><br>
     </ul>
     <p>>> articles / blogs : </p>
     <ul>
         <li>// lillian weng's posts on <a href="https://lilianweng.github.io/posts/2021-07-11-diffusion-models/">what are diffusion models?</a>
-        and <a href="https://lilianweng.github.io/posts/2024-04-12-diffusion-video/">diffusion models for video generation</a></li><br>
+        and <a href="https://lilianweng.github.io/posts/2024-04-12-diffusion-video/">diffusion models for video generation</a>
+        <input type="checkbox" id="diffusion-models" name="readArticles" value="diffusion-models"></li><br>
         <li>// [@naklecha on X]'s post on <a href="https://naklecha.notion.site/explained-latent-consistency-models-13a9290c0fd3427d8d1a1e0bed97bde2">
-            latent consistency models</a></li><br>
-        <li>// watermarking LLMs : <a href="https://watermarking.aisimplyexplained.tech">link</a></li><br>
+            latent consistency models</a>
+            <input type="checkbox" id="latent-consistency-models" name="readArticles" value="latent-consistency-models"></li><br>
+        <li>// watermarking LLMs : <a href="https://watermarking.aisimplyexplained.tech">link</a>
+        <input type="checkbox" id="watermarking-llms" name="readArticles" value="watermarking-llms"></li><br>
     </ul>
     <p>>> ik that this is a <strong>pretty</strong> long list but i am confident and will make it through!</p>
-    <p>>> back to home : <a href="./index.html">>> home</a>
+    <p>>> back to home : <a href="./index.html">>> home</a></p>
     <script>
         const toggleBtn = document.getElementById('themeToggle');
         const body = document.body;
