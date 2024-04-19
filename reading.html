@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="bookworm.png">
+    <title>>> retr0 reads</title>
+</head>
+<body>
+    <button class="toggle-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
+    <img src="gohan_reading.webp" alt="future_trunks">
+    <h2>>> what i have been reading recently</h2>
+    <p>>> (click to get paper)</p>
+    <ul>
+        <li>// <a href="https://arxiv.org/pdf/2212.14052.pdf">state space models for language modelling</a></li><br>
+        <li>// fine tuning methods:
+            <ul>
+                <li>// <a href="https://arxiv.org/pdf/2106.09685.pdf">LoRA (done)</a></li>
+                <li>// <a href="https://arxiv.org/pdf/2402.09353.pdf">DoRA (reading)</a></li>
+                <li>// <a href="https://arxiv.org/pdf/2404.03592.pdf">ReFT (next!)</a></li>
+            </ul>
+        </li><br>
+        <li>// <a href="https://arxiv.org/pdf/2010.11929.pdf">classic ViT paper</a></li><br>
+        <li>// <a href="https://arxiv.org/pdf/2305.14283.pdf">query rewriting for retrieval-augmented large language models</a></li><br>
+    </ul>
+    <p>>> ik that this is a <strong>pretty</strong> long list but i am confident and will make it through!</p>
+    <p>>> back to home : <a href="./index.html">>> home</a>
+    <script>
+        const toggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
+    
+        toggleBtn.addEventListener('click', function() {
+            body.classList.toggle('dark-theme');
+            if(body.classList.contains('dark-theme')) {
+                toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
