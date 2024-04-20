@@ -30,6 +30,10 @@ body.dark-theme a {
     color: lightpink; /* Changes link color to white in dark mode */
 }
 
+body.dark-theme a:hover {
+    color: cornflowerblue; /* Light purple color for hover state */
+}
+
 /* Toggle button styles */
 .toggle-btn {
     position: fixed;
