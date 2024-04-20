@@ -17,6 +17,19 @@ body.dark-theme {
     color: #E0E0E0; /* Light gray for text, softer than whitesmoke */
 }
 
+a {
+    color: lightgreen; /* Match the body text color */
+    text-decoration: none; /* Optional: removes underline from links */
+}
+
+a:hover {
+    color: #B19CD9; /* Light purple color for hover state */
+}
+
+body.dark-theme a {
+    color: lightpink; /* Changes link color to white in dark mode */
+}
+
 /* Toggle button styles */
 .toggle-btn {
     position: fixed;
