@@ -56,18 +56,6 @@
     </ul>
     <p>>> ik that this is a <strong>pretty</strong> long list but i am confident and will make it through!</p>
     <p>>> back to home : <a href="./index.html">>> home</a></p>
-    <script>
-        const toggleBtn = document.getElementById('themeToggle');
-        const body = document.body;
-    
-        toggleBtn.addEventListener('click', function() {
-            body.classList.toggle('dark-theme');
-            if(body.classList.contains('dark-theme')) {
-                toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-            } else {
-                toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-            }
-        });
-    </script>
+    <script src="themeToggle.js"></script>
 </body>
 </html>
