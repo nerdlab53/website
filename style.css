@@ -37,7 +37,7 @@ a {
 }
 
 a:hover {
-    color: #bef7c7; /* Light purple color for hover state */
+    color: #0aa220; /* Light purple color for hover state */
 }
 
 body.dark-theme a {
