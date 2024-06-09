@@ -41,11 +41,11 @@ a:hover {
 }
 
 body.dark-theme a {
-    color: paleturquoise; /* Changes link color to white in dark mode */
+    color: lightgreen; /* Changes link color to white in dark mode */
 }
 
 body.dark-theme a:hover {
-    color: cornflowerblue; /* Light purple color for hover state */
+    color: green; /* Light purple color for hover state */
 }
 
 /* Toggle button styles */
