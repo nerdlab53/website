@@ -28,7 +28,7 @@ body.dark-theme hr {
 
 body.dark-theme {
     background-color: #121212; /* Deep gray for a softer dark background */
-    color: paleturquoise; /* Light gray for text, softer than whitesmoke */
+    color: whitesmoke; /* Light gray for text, softer than whitesmoke */
 }
 
 a {
