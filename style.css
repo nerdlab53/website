@@ -28,11 +28,11 @@ body.dark-theme hr {
 
 body.dark-theme {
     background-color: #121212; /* Deep gray for a softer dark background */
-    color: lightseagreen; /* Light gray for text, softer than whitesmoke */
+    color: green; /* Light gray for text, softer than whitesmoke */
 }
 
 a {
-    color: lightseagreen; /* Match the body text color */
+    color: green; /* Match the body text color */
     text-decoration: none; /* Optional: removes underline from links */
 }
 
