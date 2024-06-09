@@ -6,6 +6,7 @@ body {
     margin: 40px auto;
     max-width: 650px;
     padding: 0 10px;
+    font-family: 'SF Mono', monospace;
 }
 /* Dark theme styles */
 /* body.dark-theme {
