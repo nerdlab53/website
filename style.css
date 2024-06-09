@@ -28,7 +28,7 @@ body.dark-theme hr {
 
 body.dark-theme {
     background-color: #121212; /* Deep gray for a softer dark background */
-    color: green; /* Light gray for text, softer than whitesmoke */
+    color: paleturquoise; /* Light gray for text, softer than whitesmoke */
 }
 
 a {
@@ -41,7 +41,7 @@ a:hover {
 }
 
 body.dark-theme a {
-    color: lightpink; /* Changes link color to white in dark mode */
+    color: paleturquoise; /* Changes link color to white in dark mode */
 }
 
 body.dark-theme a:hover {
