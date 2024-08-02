@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>> hello</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="maneki-neko.png">
+    <style>
+        body {
+            font-family: 'SF Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
+    <img src="_ (3).jpeg" alt="P3">
+    <br>
+    <h2>a dummys questions on the road to mech interp proficiency</h2>
+    <hr>
+    <h3><b>what is meant by the vector space of neuron activations in circuits?</b></h3>
+    <p><small>>the vector space of neuron activations refers to the mathematical representation of the activations of neurons in a neural network layer as vectors. <br>
+        >sub points: <br>
+        1. each neuron in the layer can be thought of as a basis direction in the vector space of the activations for that layer. 
+        Activation → Scalar → Set(Activations) forms → Vector. <br>
+        2. any direction in the activation space can be represented as a linear combination of the basis directions (individual neurons). So the vector space spans all possible activation patterns of the neurons. <br>
+        3. directions often correspond to meaningful features that respond to properties of the input. (e.g curves, textures).</p>
+    <hr>
+    <h3><b>how do the polysemantic neurons affect the vector space of neuron activations?</b></h3>
+    <p>>polysemantic neurons influence the vector space of neuron activations by representing multiple features (which can even be unrelated features) within a single neuron. <br>
+        it complicates the interpretation of neural networks as well as affect how they are organized and represented in the activation space. <br>
+        1.they do not correspond to unique features; instead they activate for a mixture of unrelated features. making the activation space a collection which can have distinct directions as well as rather a more complex structure in which multiple features can overlap within the same neuron <br>
+        2.polysemanticity is more prevalent for less important features, which may be represented by fewer dimensions in the embedding space. this leads to a situation where the vector space is not fully utilized for distinct features, resulting in a less interpretable structure. <br> 
+        3.in datasets with correlated features, neural networks may opt to represent these features with a single neuron rather than separate neurons. this will complicate the interpretation of activation space.</p>
+    <hr>
+    <script src="themeToggle.js"></script>
+</body>
+</html>
