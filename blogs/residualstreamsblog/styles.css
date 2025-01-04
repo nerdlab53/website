@@ -1,3 +1,66 @@
+/* Base styles from main style.css */
+body {
+    font-size: 20px;
+    background-color: whitesmoke;
+    color: black;
+    margin: 0;
+    margin: 40px auto;
+    max-width: 650px;
+    padding: 0 10px;
+    font-family: 'SF Mono', monospace;
+}
+
+/* Dark theme */
+body.dark-theme {
+    background-color: #121212;
+    color: whitesmoke;
+}
+
+/* Add this to the dark theme section */
+body.dark-theme img {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Exception for images that should not be inverted (like photos) */
+body.dark-theme img[class*="no-invert"] {
+    filter: none;
+}
+
+/* Toggle button styles */
+.toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 30px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.toggle-btn.dark-theme {
+    background-color: #333;
+}
+
+/* Links */
+a {
+    color: green;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0aa220;
+}
+
+body.dark-theme a {
+    color: lightgreen;
+}
+
+body.dark-theme a:hover {
+    color: green;
+}
+
 .lst-kix_kgh0irj7zkdr-7>li:before {
     content: "-  "
 }
@@ -1243,4 +1306,37 @@ h6 {
     orphans: 2;
     widows: 2;
     text-align: left
+}
+
+/* Add these dark theme overrides at the end of the file */
+body.dark-theme li,
+body.dark-theme p,
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme h5,
+body.dark-theme h6,
+body.dark-theme .title,
+body.dark-theme .subtitle,
+body.dark-theme [class^="c"] {
+    color: whitesmoke !important;
+}
+
+body.dark-theme a,
+body.dark-theme .c15,
+body.dark-theme [class*="link"] {
+    color: lightgreen !important;
+}
+
+body.dark-theme a:hover,
+body.dark-theme .c15:hover,
+body.dark-theme [class*="link"]:hover {
+    color: green !important;
+}
+
+body.dark-theme .c24,
+body.dark-theme .c8,
+body.dark-theme [class*="background"] {
+    background-color: #121212 !important;
 }
