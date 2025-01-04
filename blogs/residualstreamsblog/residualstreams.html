@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residual Streams in Transformer Models</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body class="c24 doc-content">
+    <h2 class="c20" id="h.mh62ydye18zw"><span class="c9 c14">Residual Streams in Transformer Models</span></h2>
+      <p class="c4"><span class="c16 c9">What are residual streams?</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; </span><span class="c0">Residual streams are an essential component of the transformer architecture. They serve two essential purposes : </span><span class="c9">accumulation of information </span><span class="c0">and </span><span class="c9">communication between the layers</span><span class="c1 c0">. The residual stream allows each layer of the transformer to read and write information to a shared communication &ldquo;channel&rdquo; or &ldquo;space&rdquo;. </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; A simple illustration showing various operations taking place in the residual stream of a transformer model: </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><span class="c9">&nbsp;</span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 245.47px; height: 321.26px;"><img alt="" src="images/image81.png" style="width: 245.47px; height: 321.26px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c16 c9">Why is it important to understand the residual stream of a transformer?</span></p>
+      <p class="c2"><span class="c16 c9"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Let&rsquo;s take an example to see why it is important to understand the residual streams of the transformers.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Consider a sentence : &ldquo;The capital of France is&rdquo; as input to a transformer model which predicts the next word for a given sequence of words. We expect the transformer model to take this as input and then return the word Paris as the output. But as much as it is fascinating, it also makes us wonder some very important things about the model itself. Such as, (a) How are the words stored in the layers of the transformer?, (b) Are we able to understand the main contributing layers to the output produced by the model?, (c) Can we quantify the contribution of each of the layers in the transformer model and in turn can they help us understand the importance of each layer?.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Understanding the residual stream is key while trying to answer these questions which you may come up with.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; As we already know that the capital of France is Paris, then we already know that the answer or the next word in this case should come out to be &ldquo;Paris&rdquo;.</span></p>
+      <p class="c2"><span class="c0 c1"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; And so it is clear that the final embedding has the highest probability for the word &ldquo;Paris&rdquo;. We are trying to understand &ldquo;how is it so&rdquo;? Not just in this case but in any case where we may encounter next word prediction.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; It seems that there exist some attention outputs or FFN outputs which contain some essential parameters leading to the predicted word being &ldquo;Paris&rdquo;.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Thus it becomes interesting to understand how exactly the output is determined and which factors contribute to the output being what it is and how the model comes up with it, in which residual stream has the fundamental part to play.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; We will try to explore the attention modules as well as the FFN modules, following this </span><span class="c15 c0"><a class="c17" href="https://www.google.com/url?q=https://arxiv.org/pdf/2312.12141v1&amp;sa=D&amp;source=editors&amp;ust=1735976257725511&amp;usg=AOvVaw2Zmktvepz7czo-EydHGPZJ">paper</a></span><span class="c0">.</span><span class="c1 c0">&nbsp;</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c16 c0">Exploring the residual stream</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; Notation :<br>Let&rsquo;s denote the </span><img src="images/image1.png"><span class="c0">&nbsp;layer input for the nth word as </span><img src="images/image2.png"><span class="c0">, the output as </span><img src="images/image3.png"><span class="c1 c0">.</span></p>
+      <p class="c4"><img src="images/image4.png"><span class="c0">&nbsp;be the sum of layer input and the attention output. We will consider </span><img src="images/image5.png"><span class="c0">&nbsp;to be the attention output and </span><img src="images/image6.png"><span class="c1 c0">&nbsp;to be the feed-forward output.</span></p>
+      <p class="c4"><span class="c0">Remember that each layer&rsquo;s output is it&rsquo;s next layer&rsquo;s output, i.e. </span><img src="images/image7.png"><span class="c0">&nbsp;= </span><img src="images/image8.png"><span class="c1 c0">.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Assume a transformer model with : </span></p>
+      <p class="c4"><span class="c1 c0">16 Transformer layers,</span></p>
+      <p class="c4"><span class="c1 c0">4096 FFN subvalues in each FFN layer.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Now, let us come to the word &ldquo;is&rdquo; in the sequence : &ldquo;The capital of France is&rdquo;</span></p>
+      <p class="c4"><span class="c1 c0">Here : </span></p>
+      <p class="c5"><img src="images/image9.png"><span class="c1 c0">&nbsp; </span></p>
+      <p class="c5"><img src="images/image10.png"><span class="c1 c0">&nbsp;</span></p>
+      <p class="c5"><img src="images/image11.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; Using this, we can now understand that the final layer output, i.e. </span><img src="images/image12.png"><span class="c0">&nbsp;is computed by the sum of </span><span class="c9">33</span><span class="c1 c0">&nbsp;vectors which are : </span></p>
+      <ul class="c3 lst-kix_kgh0irj7zkdr-0 start">
+         <li class="c4 c6 li-bullet-0"><span class="c0">0th layer for input : </span><img src="images/image13.png"></li>
+         <li class="c4 c6 li-bullet-0"><span class="c1 c0">16 attention outputs </span></li>
+         <li class="c4 c6 li-bullet-0"><span class="c1 c0">16 FFN outputs</span></li>
+      </ul>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Where attention output can be described as : </span></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image14.png"><span class="c1 c0">&nbsp;</span></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; And the FFN outputs can be described similarly as : </span></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image15.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; We can call this as a subvalue residual stream, where </span><img src="images/image16.png"><span class="c0">&nbsp;and </span><img src="images/image17.png"><span class="c1 c0">&nbsp;are the computed subvalues for each dimension of the attention and the FFN layers respectively.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Since the sentence has 6 tokens, each attention output can be regarded as the sum of 6 attention subvalues and a bias. Similarly, each FFN output can be computed by adding 4096 subvalues and a FFN bias.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; And so the attention subvalue is also calculated as below : </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image18.png"></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; Here, the </span><img src="images/image19.png"><span class="c0">&nbsp;represents the 0th attention subvalue on layer </span><img src="images/image20.png"><span class="c1 c0">, on the residual stream of token &ldquo;is&rdquo;. </span></p>
+      <p class="c5"><img src="images/image21.png"><span class="c1 c0">&nbsp;: Is the multi-head attention weight</span></p>
+      <p class="c5"><img src="images/image22.png"><span class="c1 c0">&nbsp;: Is the value matrix</span></p>
+      <p class="c5"><img src="images/image23.png"><span class="c1 c0">&nbsp;: Is the output matrix</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; Just like we did for the subvalues, the </span><img src="images/image19.png"><span class="c0">&nbsp;is a vector rather than a number which has been formed by the concatenation of attention scores </span><img src="images/image24.png"><span class="c0">&nbsp;on the different heads of the transformer layers. In this example if we take the heads to be 8 and dimension of each head to be 128, then we expect to find the vector </span><img src="images/image19.png"><span class="c0">&nbsp;to be a 1024 dimension vector (</span><img src="images/image25.png"><span class="c0 c23">)</span><span class="c1 c0">).</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; Now if we suppose the heads to each have 128 dimensions then the first head computes values from 1 to 128 i.e. </span><img src="images/image26.png"><span class="c0">, second from 129 to 256 i.e. </span><img src="images/image27.png"><span class="c0">, similarly from 257 to 384 i.e. </span><img src="images/image28.png"><span class="c0">&nbsp;and so we generalize it to be </span><img src="images/image29.png"><span class="c1 c0">&nbsp;for the very last head&rsquo;s scores.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image30.png"></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; Similarly, in the FFN layers, </span><img src="images/image31.png"><span class="c0">&nbsp;(the </span><img src="images/image32.png"><span class="c0">&nbsp;subvalue on layer </span><img src="images/image20.png"><span class="c0">) is computed by the coefficient score </span><img src="images/image33.png"><span class="c0">&nbsp;and the </span><img src="images/image32.png"><span class="c0">&nbsp;vector in FFN&rsquo;s second fully connected network </span><img src="images/image34.png"><span class="c0">, where the coefficient score is calculated by the layer normalization of residual output </span><img src="images/image35.png"><span class="c0">&nbsp;and the </span><img src="images/image36.png"><span class="c0">vector in FFN&rsquo;s first fully connected network </span><img src="images/image37.png"></p>
+      <p class="c5"><span class="c0">&nbsp;</span><img src="images/image38.png"></p>
+      <p class="c5"><img src="images/image39.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Thus, these are the ways we can understand how the attention as well as the FFN subvalues are computed and how they are used to form these vectors we have previously discussed about.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c16 c0">Mechanism Analysis : Distribution Change Of Residual Connections</span></p>
+      <p class="c2"><span class="c16 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Now, to understand how the information is being combined by the transformer, we have to understand the key mechanisms - vector addition and the effect of the vector addition on the word probabilities.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; As far as vector addition goes, we know that each vector inside the residual stream is a direct sum of other vectors. This applies both to the residual stream values as well as the subvalues.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; To understand further how the distribution change will affect the understanding of the transformer we will first understand which values to take in consideration for when explaining how the transformer is combining all this knowledge.<br><br>&gt; We will be looking at the Before-Softmax(BS) values for two main reasons :</span></p>
+      <ol class="c3 lst-kix_wlmqj2hp85de-0 start" start="1">
+         <li class="c4 c6 li-bullet-0"><span class="c1 c0">Linear Additivity : Due to the fact that these values can be linearly added, they help make the analysis very simple.</span></li>
+      </ol>
+      <p class="c2 c22"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image40.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In contrast, the probabilities after the softmax will combine non-linearly in the form : </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4 c13"><img src="images/image41.png"></p>
+      <p class="c2 c13"><span class="c1 c0"></span></p>
+      <ol class="c3 lst-kix_wlmqj2hp85de-0" start="2">
+         <li class="c4 c6 li-bullet-0"><span class="c0">Direct relationship to final rankings : </span><img src="images/image42.png"><span class="c1 c0">&nbsp;values have a direct relationship to the final rankings:</span></li>
+      </ol>
+      <ol class="c3 lst-kix_wlmqj2hp85de-1 start" start="1">
+         <li class="c4 c19 li-bullet-0"><span class="c0">Highest </span><img src="images/image42.png"><span class="c1 c0">&nbsp;value will result in highest probability after softmax</span></li>
+         <li class="c4 c19 li-bullet-0"><span class="c1 c0">Second will lead to second highest and so on &hellip;</span></li>
+      </ol>
+      <p class="c2 c25"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; We can visualize the </span><img src="images/image42.png"><span class="c1 c0">&nbsp;scores to be a vector such as : </span></p>
+      <p class="c4"><span class="c1 c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+      <p class="c5"><img src="images/image43.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image44.png"></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; The reason why the </span><img src="images/image42.png"><span class="c0">&nbsp;value is better for analyzing the vector addition effects on the token ranking and the relative probabilities is because </span><img src="images/image42.png"><span class="c1 c0">&nbsp;values are able to maintain monotonicity through addition, while preserving the relative differences between the token rankings.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; When we add the </span><img src="images/image42.png"><span class="c0">&nbsp;values : </span><img src="images/image40.png"><span class="c0">, If a token A has a higher </span><img src="images/image42.png"><span class="c1 c0">&nbsp;value than B then the relative difference is preserved between them as a direct addition.</span></p>
+      <p class="c4"><span class="c1 c0">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></p>
+      <p class="c4"><span class="c1 c0">Proof : </span></p>
+      <p class="c4"><span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><img src="images/image45.png"><span class="c0">&nbsp; &gt; &nbsp; </span><img src="images/image46.png"><span class="c1 c0">&nbsp;,</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><img src="images/image47.png"></p>
+      <p class="c4 c21"><span class="c0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><img src="images/image48.png"></p>
+      <p class="c4"><span class="c1 c0">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">In contrast with the probabilities : </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">After the softmax operation, probabilities become : </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4 c13"><img src="images/image41.png"></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">We can immediately see that the relationship has become highly non-linear and complex due to the exponential function and the normalization denominator. They make it really difficult to track the relative changes in the token probabilities.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; All in all, using the </span><img src="images/image42.png"><span class="c1 c0">&nbsp;values we are immediately able to tell how the tokens are going to be ranked after the softmax operation, </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image49.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">This helps in letting us know the changes in the rankings without actually calculating the actual probabilities themselves, and thus </span><img src="images/image42.png"><span class="c1 c0">&nbsp;values prove to be a transparent interpretation towards understanding the token probabilities.</span></p>
+      <p class="c12"><span class="c1 c0">&gt; So all in all in summary : </span></p>
+      <p class="c12"><span class="c0">The </span><img src="images/image42.png"><span class="c0">&nbsp;values change provides an intuitive interpretation of the distribution change mechanism. When </span><img src="images/image50.png"><span class="c0">&nbsp;is directly added to </span><img src="images/image51.png"><span class="c1 c0">, it controls probability changes in predictable ways:</span></p>
+      <ol class="c3 lst-kix_pcmjwfce463q-0 start" start="1">
+         <li class="c12 c6 li-bullet-0"><span class="c0">For high BS-values: If </span><img src="images/image50.png"><span class="c1 c0">&nbsp;is among the highest BS-values, vector v increases the probability of word w</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">For low BS-values: Probabilities of tokens with smallest BS-values will decrease</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">For middle BS-values: The effect depends on x&#39;s probability distribution</span></li>
+      </ol>
+      <p class="c12"><span class="c1 c0">&gt; This mechanism gives vector v multiple capabilities:</span></p>
+      <ul class="c3 lst-kix_m4v22km55uw2-0 start">
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">Increasing probabilities of tokens with very large BS-values</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">Decreasing probabilities of tokens with very small BS-values</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">Helping distinguish between tokens when BS-value differences are large</span></li>
+      </ul>
+      <p class="c12"><span class="c0">&gt; This analysis aligns with the superposition hypothesis </span><span class="c15 c0"><a class="c17" href="https://www.google.com/url?q=https://transformer-circuits.pub/2023/toy-double-descent/index.html&amp;sa=D&amp;source=editors&amp;ust=1735976257883502&amp;usg=AOvVaw3cy5zcuzjmatxb2LH01v_8">here</a></span><span class="c1 c0">, suggesting that one neuron can encode multiple useful features. We can extend this understanding to analyze FFN subvalues, where:</span></p>
+      <ul class="c3 lst-kix_25ztxfbeq4hl-0 start">
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">Each subvalue is a product of a coefficient score and an fc2 vector</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">Positive coefficients enhance probabilities of top BS-value tokens</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">Negative coefficients could reduce probabilities (prevented by ReLU activation)</span></li>
+      </ul>
+      <p class="c12"><span class="c1 c0">&gt; The key insight is that while we typically analyze models by looking at &quot;top words&quot; and model confidence through probabilities, this approach has limitations due to non-linear probability changes. When adding v to x, looking only at probabilities in v doesn&#39;t reliably predict probability increases, despite experimental support. However, BS-values provide certainty because:</span></p>
+      <ol class="c3 lst-kix_5mwfg9ep2qr3-0 start" start="1">
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">They add directly to x</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">They maintain clear relationships between tokens</span></li>
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">They directly correspond to final probability rankings</span></li>
+      </ol>
+      <p class="c12"><span class="c1 c0">This makes BS-values a more transparent and reliable tool for understanding how transformers combine information through vector addition, providing insights that will be crucial for deeper analysis of transformer mechanisms.</span></p>
+      <p class="c12"><span class="c0 c16">Contribution of Layers and Subvalues</span></p>
+      <p class="c12"><span class="c1 c0">&gt; Now we move toward the next question, i.e. how the layers and the subvalues are contributing in the knowledge which is merged into the final embedding for prediction.</span></p>
+      <p class="c12"><span class="c0">&gt; The question of how parameters directly contain knowledge leads us to analyze how this knowledge merges into the final embedding for prediction. Through distribution change and </span><img src="images/image42.png"><span class="c0">&nbsp;value analyses, we can understand that if a subvalue contains knowledge, the corresponding tokens should have large </span><img src="images/image42.png"><span class="c1 c0">&nbsp;values, causing probability increases when adding the subvalue to other vectors.</span></p>
+      <p class="c12"><span class="c1 c0">&gt; However, understanding just the mechanism isn&rsquo;t sufficient.</span></p>
+      <p class="c12"><span class="c1 c0">&gt; To identify which layers and subvalues are more significant for prediction, we need to calculate their contribution scores.</span></p>
+      <p class="c12"><span class="c1 c0">&gt; The challenge lies in making this calculation fair across different layers, particularly because : </span></p>
+      <ol class="c3 lst-kix_6of4blyfoy2z-0 start" start="1">
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">The Lower Layer problem : </span></li>
+      </ol>
+      <ol class="c3 lst-kix_6of4blyfoy2z-1 start" start="1">
+         <li class="c10 li-bullet-0"><span class="c1 c0">Lower layers typically have smaller probabilities</span></li>
+         <li class="c10 li-bullet-0"><span class="c1 c0">There&rsquo;s a two step prediction process : </span></li>
+      </ol>
+      <ol class="c3 lst-kix_6of4blyfoy2z-2 start" start="1">
+         <li class="c12 c18 li-bullet-0"><img src="images/image52.png"><span class="c1 c0">&nbsp;Step : Rank changes significantly but probability changes little</span></li>
+         <li class="c12 c18 li-bullet-0"><img src="images/image53.png"><span class="c1 c0">&nbsp;Step : Probability changes become substantial</span></li>
+      </ol>
+      <ol class="c3 lst-kix_6of4blyfoy2z-0" start="2">
+         <li class="c12 c6 li-bullet-0"><span class="c1 c0">Better contribution metric : </span></li>
+      </ol>
+      <ol class="c3 lst-kix_6of4blyfoy2z-1 start" start="1">
+         <li class="c10 li-bullet-0"><span class="c1 c0">Instead of using probability increase directly, log probability increase proves more suitable because : </span></li>
+      </ol>
+      <ol class="c3 lst-kix_6of4blyfoy2z-2 start" start="1">
+         <li class="c12 c18 li-bullet-0"><span class="c0">The curve of </span><img src="images/image54.png"><span class="c0">&nbsp;is more linear than </span><img src="images/image55.png"></li>
+         <li class="c12 c18 li-bullet-0"><span class="c1 c0">It aligns with the loss function used during training</span></li>
+         <li class="c12 c18 li-bullet-0"><span class="c1 c0">It provides fairer comparison across layers</span></li>
+      </ol>
+      <p class="c12"><span class="c1 c0">&gt; To understand the lower layer problem let us take an example : </span></p>
+      <p class="c12"><span class="c0">Consider adding vector </span><img src="images/image56.png"><span class="c0">&nbsp;to </span><img src="images/image57.png"><span class="c1 c0">&nbsp;where : </span></p>
+      <p class="c7"><img src="images/image58.png"></p>
+      <p class="c12"><span class="c1 c0">Now the probability becomes : </span></p>
+      <p class="c7"><img src="images/image59.png"></p>
+      <p class="c12"><span class="c0">In the later layers these changes get accumulated and then get translated into large probability differences. And thus this is why we are using a log probability measure, which provides a balanced way to measure contributions across all the layers, also preventing us from undervaluing the crucial groundwork done in earlier layers of the network.</span></p>
+      <p class="c4"><span class="c0">&gt; The contribution score </span><img src="images/image60.png"><span class="c0">&nbsp;is then for layer </span><img src="images/image20.png"><span class="c1 c0">&nbsp;is calculated as : </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image61.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Now let us also try and understand the relationship between contribution scores : </span></p>
+      <p class="c4"><span class="c0">The contribution scores now have a linear monotonically increasing relationship. When ranking subvalues by their contribution scores and calculating their sums </span><img src="images/image62.png"><span class="c0">, the relationship between </span><img src="images/image63.png"><span class="c0">&nbsp;and </span><img src="images/image64.png"><span class="c1 c0">&nbsp;is linear.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; This linearity between the contribution scores allows us to share overall contribution among subvalues and normalize the subvalue contribution score efficiently.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 295.00px; height: 200.52px;"><img alt="" src="images/image77.png" style="width: 295.00px; height: 200.52px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 292.24px; height: 187.80px;"><img alt="" src="images/image78.png" style="width: 292.24px; height: 187.80px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span>
+      <hr style="page-break-before:always;display:none;">
+      </p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 284.01px; height: 215.70px;"><img alt="" src="images/image79.png" style="width: 284.01px; height: 215.70px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c16 c0">Cross-Layer Contributions : </span></p>
+      <p class="c2"><span class="c16 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Through the term cross-layer contributions we are trying to study whether there exist any parameters which can contribute by activating other parameters?</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; Like in the previous section, consider the addition of a subvalue </span><img src="images/image56.png"><span class="c0">&nbsp;to </span><img src="images/image57.png"><span class="c0">, </span><img src="images/image56.png"><span class="c0">&nbsp;will prove to be more helpful to </span><img src="images/image57.png"><span class="c0">&nbsp;if it has the ability to increase the probability of the word </span><img src="images/image65.png"><span class="c0">, i.e. greater </span><img src="images/image50.png"><span class="c1 c0">.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; It so does happen to be the case that the values in a transformer are not only used as values but also as queries to activate other subvalues.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; For FFN subvalues, for instance, the activation occurs through : </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image66.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image67.png"></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">Each previous layers takes a part in contributing to compute the subvalue&rsquo;s coefficient score </span><img src="images/image33.png"><span class="c1 c0">.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; This is how normalization alters the transform of </span><img src="images/image68.png"><span class="c1 c0">&nbsp;: </span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image69.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image70.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image71.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><img src="images/image72.png"></p>
+      <p class="c5 c11"><span class="c1 c0"></span></p>
+      <p class="c5"><span class="c0">For each subvalue </span><img src="images/image73.png"><span class="c0">and </span><img src="images/image74.png"><span class="c1 c0">&nbsp;are fixed.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; The layer-normalization&rsquo;s impact can be analyzed through the relationship between </span><img src="images/image75.png"><span class="c1 c0">&nbsp;and it&rsquo;s normalized form, showing approximately linear behaviour.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 535.00px; height: 396.00px;"><img alt="" src="images/image80.png" style="width: 535.00px; height: 396.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c0">&gt; This indicates that a vector&rsquo;s contribution to activating FFN subvalues can be measured by its inner product with </span><img src="images/image76.png"><span class="c0">.</span>
+      <hr style="page-break-before:always;display:none;">
+      </p>
+      <p class="c4"><span class="c16 c0">Revisiting our initial questions</span></p>
+      <p class="c2"><span class="c16 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; At the beginning of our exploration into the residual streams, we set 3 questions for ourselves to answer at the end of reading the literature.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c1 c0">&gt; Let&rsquo;s revisit these questions and see if we were able to get a bit of insight towards finding answers for them.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c9">&gt; Q.1 How are words stored in transformer layers?</span><span class="c1 c0">&nbsp;</span></p>
+      <p class="c4"><span class="c1 c0">&gt;Through our detailed analysis of residual streams, we&#39;ve seen that information isn&#39;t stored in isolated layers, but rather accumulates through a complex network of vector additions. Each layer contributes attention outputs (A) and FFN outputs (F) that combine to form the final representations. We showed how both attention subvalues and FFN subvalues are computed and merged, revealing that information is distributed across the network rather than stored in discrete locations.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c4"><span class="c9">&gt; Q.2 Can we identify the main contributing layers to model outputs?</span><span class="c1 c0">&nbsp;</span></p>
+      <p class="c4"><span class="c1 c0">&gt; By introducing BS-values (Before-Softmax values) as our analytical framework, we&#39;ve developed a clear way to track each layer&#39;s influence. BS-values proved particularly valuable because they maintain linear additivity and directly correspond to final token rankings. This allowed us to trace how individual layers shape the model&#39;s predictions in a way that raw probabilities couldn&#39;t reveal.</span></p>
+      <p class="c2"><span class="c1 c9"></span></p>
+      <p class="c4"><span class="c9">&gt; Q.3 How can we quantify layer contributions?</span><span class="c1 c0">&nbsp;</span></p>
+      <p class="c4"><span class="c1 c0">&gt; We tackled this challenge by addressing the &quot;lower layer problem&quot; - the tendency of early layers to show deceptively small probability changes despite their crucial role. By developing a contribution metric based on log probability increase, we created a fair way to measure each layer&#39;s impact. The discovery that contribution scores maintain a linear monotonically increasing relationship gave us a reliable way to compare contributions across different layers.</span></p>
+      <p class="c2"><span class="c1 c0"></span></p>
+      <p class="c12"><span class="c1 c0">&gt; Our investigation went beyond these initial questions, revealing how layers interact through cross-layer contributions, particularly in how FFN subvalues can activate other parameters. This showed us that transformer layers don&#39;t just process information - they actively influence how other layers interpret and use that information.</span></p>
+      <p class="c12"><span class="c1 c0">&gt; Through this analysis, we were able to develop a deeper understanding of transformers not just as static processing units, but as dynamic systems where information flows, combines, and evolves. </span></p>
+      <p class="c12 c11"><span class="c1 c0"></span></p>
+      <p class="c12 c11"><span class="c1 c0"></span></p>
+      <p class="c12"><span class="c16 c0">References and suggested further reading :</span></p>
+      <ol class="c3 lst-kix_qdmamrch0u3m-0 start" start="1">
+         <li class="c8 c6 li-bullet-0"><span class="c15 c0"><a class="c17" href="https://www.google.com/url?q=https://arxiv.org/abs/2312.12141v1&amp;sa=D&amp;source=editors&amp;ust=1735976257967747&amp;usg=AOvVaw02gIJvHyjmPM23n1w320cF">Exploring the Residual Stream of Transformers</a></span></li>
+         <li class="c6 c8 li-bullet-0"><span class="c15 c0"><a class="c17" href="https://www.google.com/url?q=https://transformer-circuits.pub/2023/toy-double-descent/index.html&amp;sa=D&amp;source=editors&amp;ust=1735976257968015&amp;usg=AOvVaw1lSmWINMBOegSars0SHihf">Superposition, Memorization and Double Descent</a></span></li>
+         <li class="c8 c6 li-bullet-0"><span class="c0 c15"><a class="c17" href="https://www.google.com/url?q=https://transformer-circuits.pub/2022/toy_model/index.html%23demonstrating-setup-model&amp;sa=D&amp;source=editors&amp;ust=1735976257968231&amp;usg=AOvVaw3CKqrUGpcX8jXaD0f5_8Mx">Toy Models of Superposition</a></span></li>
+      </ol>
+</body>
+</html>
