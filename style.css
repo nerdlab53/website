@@ -8,9 +8,9 @@ body {
     padding: 0 10px;
     font-family: 'SF Mono', monospace;
     position: relative;
-    border: 2px solid #00ff41;  /* Added border */
+    border: 2px solid #6853f5;  /* Added border */
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); 
+    box-shadow: 0 0 15px rgba(49, 111, 255, 0.2); 
 }
 /* Dark theme styles */
 /* body.dark-theme {
@@ -36,20 +36,20 @@ body.dark-theme {
 }
 
 a {
-    color: green; /* Match the body text color */
+    color: rgb(67, 118, 247); /* Match the body text color */
     text-decoration: none; /* Optional: removes underline from links */
 }
 
 a:hover {
-    color: #0aa220; /* Light purple color for hover state */
+    color: #3a57fa; /* Light purple color for hover state */
 }
 
 body.dark-theme a {
-    color: lightgreen; /* Changes link color to white in dark mode */
+    color: rgb(97, 117, 249); /* Changes link color to white in dark mode */
 }
 
 body.dark-theme a:hover {
-    color: green; /* Light purple color for hover state */
+    color: rgb(49, 98, 232); /* Light purple color for hover state */
 }
 
 /* Toggle button styles */
