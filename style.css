@@ -1,7 +1,7 @@
 body {
     font-size: 14px;
-    background-color: whitesmoke;
-    color: black;
+    background-color: #121212; /* Deep gray for a softer dark background */
+    color: whitesmoke; /* Light gray for text, softer than whitesmoke */
     margin: 0;
     margin: 80px auto;
     max-width: 650px;
@@ -12,62 +12,22 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(49, 111, 255, 0.2); 
 }
-/* Dark theme styles */
-/* body.dark-theme {
-    background-color: black;
-    color: whitesmoke;
-} */
 
 hr {
-    background-color: lightslategrey;
-    border-width: 0px;
-    height: 1px;
-}
-
-body.dark-theme hr {
     background-color: lightcyan;
     border-width: 0px;
     height: 1px;
 }
 
-body.dark-theme {
-    background-color: #121212; /* Deep gray for a softer dark background */
-    color: whitesmoke; /* Light gray for text, softer than whitesmoke */
-}
-
 a {
-    color: rgb(67, 118, 247); /* Match the body text color */
+    color: rgb(97, 117, 249); /* Link color for dark theme */
     text-decoration: none; /* Optional: removes underline from links */
 }
 
 a:hover {
-    color: #3a57fa; /* Light purple color for hover state */
-}
-
-body.dark-theme a {
-    color: rgb(97, 117, 249); /* Changes link color to white in dark mode */
-}
-
-body.dark-theme a:hover {
     color: rgb(49, 98, 232); /* Light purple color for hover state */
 }
 
-/* Toggle button styles */
-.toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 60px;
-    height: 30px;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
-.toggle-btn.dark-theme {
-    background-color: #333;
-}
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -85,7 +45,7 @@ video,
 iframe,
 audio {
     display: block;
-    margin: 0 auto;
+    margin: 10px auto 0 auto;
     border-radius: 10px;
     max-width: 100%;
 } 
