@@ -1,15 +1,15 @@
 /* ===== base ===== */
 :root {
-    --bg: #121212;
-    --bg-soft: #1a1a1d;
-    --bg-card: #18181b;
-    --border: #2a2a30;
-    --text: #e6e6e6;
-    --muted: #8b8b93;
-    --accent: #6853f5;
-    --accent-soft: #6175f9;
-    --link: #7c88f9;
-    --link-hover: #a0a9ff;
+    --bg: #0d0d0d;
+    --bg-soft: #161616;
+    --bg-card: #141414;
+    --border: #262626;
+    --text: #ffffff;
+    --muted: #9a9a9a;
+    --accent: #00ff85;       /* neon green */
+    --accent-soft: #1e90ff;  /* electric blue */
+    --link: #1e90ff;
+    --link-hover: #ff0099;   /* vivid pink */
 }
 
 * {
@@ -20,7 +20,7 @@ body {
     font-size: 14px;
     line-height: 1.65;
     background-color: var(--bg);
-    background-image: radial-gradient(circle at 50% -20%, rgba(104, 83, 245, 0.08), transparent 60%);
+    background-image: radial-gradient(circle at 50% -20%, rgba(0, 255, 133, 0.06), transparent 60%);
     color: var(--text);
     margin: 80px auto;
     max-width: 900px;
@@ -29,7 +29,7 @@ body {
     position: relative;
     border: 1px solid var(--border);
     border-radius: 10px;
-    box-shadow: 0 0 40px rgba(104, 83, 245, 0.07);
+    box-shadow: 0 0 40px rgba(0, 255, 133, 0.05);
 }
 
 hr {
@@ -177,7 +177,7 @@ img, video, iframe, audio {
     height: 9px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 0 3px rgba(104, 83, 245, 0.18);
+    box-shadow: 0 0 0 3px rgba(0, 255, 133, 0.18);
 }
 
 .timeline .role {
@@ -218,9 +218,9 @@ img, video, iframe, audio {
 }
 
 a.card:hover {
-    border-color: var(--accent);
+    border-color: var(--link-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(104, 83, 245, 0.12);
+    box-shadow: 0 6px 24px rgba(255, 0, 153, 0.15);
 }
 
 .card-title {
@@ -256,9 +256,9 @@ a.card:hover .card-title {
 
 .card .stack span {
     font-size: 0.72rem;
-    color: var(--accent-soft);
-    background: rgba(104, 83, 245, 0.1);
-    border: 1px solid rgba(104, 83, 245, 0.22);
+    color: var(--accent);
+    background: rgba(0, 255, 133, 0.08);
+    border: 1px solid rgba(0, 255, 133, 0.25);
     border-radius: 5px;
     padding: 1px 7px;
 }
@@ -284,8 +284,8 @@ a.card:hover .card-title {
 }
 
 .tags li:hover {
-    border-color: var(--accent);
-    color: var(--accent-soft);
+    border-color: var(--link-hover);
+    color: var(--link-hover);
 }
 
 /* ===== contact links ===== */
