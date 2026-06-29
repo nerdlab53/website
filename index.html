@@ -3,53 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>>> hello</title>
+    <title>>> himanshu bhenwal</title>
+    <meta name="description" content="himanshu bhenwal — machine learning engineer working on deep learning, LLMs, reinforcement learning and interpretability.">
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="icon" type="image/png" href="maneki-neko.png">
-    <style>
-        body {
-            font-family: 'Helvetica';
-        }
-    </style>
 </head>
 <body>
-    <img src="IMG_8598.jpg">
-    <br>
-    <h2>hello!</h2>
-    <p><b>hi, my name is Himanshu!</b> i am a machine learning engineer stuck in the constant loop of learning new things and building cool stuff!</p>
+    <nav class="site-nav reveal">
+        <a href="./index.html" class="active">home</a>
+        <a href="./cv.html">cv</a>
+        <a href="./posts.html">blogs</a>
+        <a href="./reading.html">reading</a>
+        <span class="spacer"></span>
+        <a href="https://github.com/nerdlab53">github</a>
+        <a href="https://x.com/retr0sushi_">twitter</a>
+    </nav>
+
+    <header class="hero reveal" style="animation-delay: 0.05s;">
+        <img src="IMG_8598.jpg" alt="himanshu">
+        <div class="hero-text">
+            <h2>hi, i'm himanshu!</h2>
+            <p class="hero-role">machine learning engineer <span class="at">@</span> <a href="https://prudentbit.com">PrudentBit</a></p>
+            <p class="hero-role">stuck in the constant loop of learning new things and building cool stuff.</p>
+        </div>
+    </header>
+
     <hr>
-    <p>currently, i am a lead machine learning engineer at <a href="https://prudentbit.com">PrudentBit</a>! previously, i was a researcher at <a href="https://lossfunk.com">Lossfunk</a> working on reducing compounding rollout error and its induced distributional shift and studying RL generalizability on benchmarks such as <a href="https://psc-g.github.io/posts/research/rl/atari_defense/">Atari-100K</a>.</p>
+
+    <section class="reveal" style="animation-delay: 0.1s;">
+        <p>currently, i'm a machine learning engineer at <a href="https://prudentbit.com">PrudentBit</a>, where i build secure document intelligence systems &mdash; PII detection &amp; redaction, multilingual NER pipelines, and the hybrid ML + rule-based stack behind them.</p>
+        <p>previously, i was a researcher at <a href="https://lossfunk.com">Lossfunk</a> working on reducing compounding rollout error and its induced distributional shift, and studying RL generalizability on benchmarks such as <a href="https://psc-g.github.io/posts/research/rl/atari_defense/">Atari-100K</a>.</p>
+        <p>i love deep learning, LLMs and world models, and am always looking to build cool projects on these &mdash; so ping me on any of the links below if you'd like to collaborate on something!</p>
+    </section>
+
     <hr>
-    <p>i love deep learning, LLMs and am always looking to build cool projects on these, so ping me up on any of the below if you would like to collaborate on something!</p>
-    <ul>
-        <li><a href="https://x.com/retr0sushi_">[@retr0sushi_]</a> : twitter</li>
-        <li>[@himanshuhasnoenemies.] : discord</li>
-        <li><a href="mailto:retr0sushi.04@gmail.com">mail</a></li>
-    </ul>
-    <hr>
-    <p>i am currently working on the following topics : 
+
+    <section class="reveal" style="animation-delay: 0.15s;">
+        <h3 class="section-title">now</h3>
+        <p>things i'm spending my time on:</p>
         <ul>
             <li>GPU programming</li>
-            <li>reinforcement learning</li>
-            <li>world models</a></li>
-            <li>some interpretability and ai safety stuff as well</li>
-            <li>also teaching ML and math!</li>
-            <li>sometimes i run cool experiments on my own time and put them up on my github here : <a href="https://github.com/nerdlab53">github</a></li>
+            <li>reinforcement learning &amp; world models</li>
+            <li>some interpretability and ai safety stuff</li>
+            <li>teaching ML and math</li>
+            <li>running small experiments on my own time &mdash; they end up on my <a href="https://github.com/nerdlab53">github</a></li>
         </ul>
-    </p>
-    <p>talks : </p>
-    <ul>
-        <li>Transformers to Mamba at AI4Bharat by IIT Madras <a href="https://www.youtube.com/watch?v=oberMf6WSsQ&t=417s">watch here!</a></li>
-    </ul>
-    <p>blogs section (i don't write much but most of what i become fascinated by, i share on my <a href="https://x.com/retr0sushi_">twitter</a>) : 
+    </section>
+
+    <hr>
+
+    <section class="reveal" style="animation-delay: 0.2s;">
+        <h3 class="section-title">experience</h3>
+        <ul class="timeline">
+            <li>
+                <span class="role">machine learning engineer</span> <span class="org">@ PrudentBit</span>
+                <span class="when">jan 2026 &mdash; present</span>
+                <p>architecting a secure document intelligence system for PII detection &amp; redaction at enterprise scale &mdash; multilingual NER across structured and unstructured data (10k+ docs/day), pairing transformer models with rule-based validation for a ~10% F1 bump.</p>
+            </li>
+            <li>
+                <span class="role">researcher intern</span> <span class="org">@ Lossfunk</span>
+                <span class="when">jul 2025 &mdash; jan 2026</span>
+                <p>research on model-based RL for better generalization and lower sample complexity &mdash; prototyping world models for high-dimensional environments and chasing more stable long-horizon predictions.</p>
+            </li>
+            <li>
+                <span class="role">machine learning engineer intern</span> <span class="org">@ PrudentBit</span>
+                <span class="when">jun 2024 &mdash; jul 2025</span>
+                <p>built core modules of Immunefiles-PII, a production system for sensitive data detection, and helped ship scalable pipelines for real-world document workloads while tightening the precision-recall tradeoff on noisy data.</p>
+            </li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <section class="reveal" style="animation-delay: 0.25s;">
+        <h3 class="section-title">projects</h3>
+        <div class="cards">
+            <a class="card" href="https://github.com/nerdlab53">
+                <p class="card-title"><i class="fab fa-github"></i> playing MsPacMan with RL + VQ-VAE world models</p>
+                <p>end-to-end pipeline for learning compact latent policies on Ms Pac-Man: a VQ-VAE compresses raw frames into a discrete latent space, DQN agents (with/without PER) learn directly on those latents, plus value / world-model / action-mapping nets for model-based planning.</p>
+                <div class="stack"><span>Python</span><span>PyTorch</span><span>WandB</span></div>
+            </a>
+            <a class="card" href="https://github.com/nerdlab53">
+                <p class="card-title"><i class="fab fa-github"></i> sushi-GGUF</p>
+                <p>a minimalist framework for GGUF quantization of SDXL models &mdash; quantize Stable Diffusion to precision levels like Q4KS, Q5KS and Q8_0 using llama.cpp binaries.</p>
+                <div class="stack"><span>Python</span><span>llama.cpp</span><span>SDXL</span></div>
+            </a>
+            <a class="card" href="https://github.com/nerdlab53">
+                <p class="card-title"><i class="fab fa-github"></i> paper implementations</p>
+                <p>a repo collecting several research paper implementations i've worked through &mdash; mostly reproductions to actually understand the ideas end to end.</p>
+                <div class="stack"><span>Python</span><span>PyTorch</span><span>WandB</span></div>
+            </a>
+        </div>
+    </section>
+
+    <hr>
+
+    <section class="reveal" style="animation-delay: 0.3s;">
+        <h3 class="section-title">talks &amp; community</h3>
+        <ul>
+            <li>Transformers to Mamba &mdash; AI4Bharat, IIT Madras (jul 2024) <a href="https://www.youtube.com/watch?v=oberMf6WSsQ&t=417s">watch here</a></li>
+            <li>An Introduction to Reasoning Capabilities in Language Models &mdash; IEEE BPIT (feb 2025)</li>
+            <li>chairperson, IEEE BPIT Student Branch &mdash; mentored a community of 80+ students (2021&ndash;25)</li>
+            <li>co-creator &amp; lead instructor of IEEE BPIT's SIG on ML &mdash; semester-long classes + weekly paper reading sessions</li>
+            <li>jury member at Datadive: The Ultimate Datathon (IEEE WIE BPIT)</li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <section class="reveal" style="animation-delay: 0.35s;">
+        <h3 class="section-title">writing</h3>
+        <p>i don't write much &mdash; most of what i become fascinated by, i share on my <a href="https://x.com/retr0sushi_">twitter</a>. the longer pieces live here:</p>
         <ul>
             <li><a href="./blogs/residualstreamsblog/residualstreams.html">residual streams in transformer models</a></li>
             <li><a href="https://x.com/retr0sushi_/status/1927263067278098664">the platonic representation hypothesis</a></li>
             <li><a href="./mech_interp.html">my mech interp beginner questions</a></li>
-        </ul> 
-    </p>
+        </ul>
+    </section>
+
     <hr>
-    <p><b>thanks for visiting!</b></p>
+
+    <section class="reveal" style="animation-delay: 0.4s;">
+        <h3 class="section-title">toolbox</h3>
+        <ul class="tags">
+            <li>Python</li>
+            <li>C++</li>
+            <li>C</li>
+            <li>PyTorch</li>
+            <li>JAX</li>
+            <li>TensorFlow</li>
+            <li>Keras</li>
+            <li>scikit-learn</li>
+            <li>Transformers</li>
+            <li>LangChain</li>
+            <li>LlamaIndex</li>
+            <li>NumPy</li>
+            <li>Pandas</li>
+            <li>FastAPI</li>
+            <li>Django</li>
+            <li>Celery</li>
+            <li>PostgreSQL</li>
+            <li>Redis</li>
+            <li>Docker</li>
+            <li>GitHub Actions</li>
+            <li>AWS</li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <section class="reveal" style="animation-delay: 0.45s;">
+        <h3 class="section-title">elsewhere</h3>
+        <ul class="links">
+            <li><span class="label">// twitter</span><a href="https://x.com/retr0sushi_">@retr0sushi_</a></li>
+            <li><span class="label">// github</span><a href="https://github.com/nerdlab53">nerdlab53</a></li>
+            <li><span class="label">// discord</span>@himanshuhasnoenemies.</li>
+            <li><span class="label">// mail</span><a href="mailto:retr0sushi.04@gmail.com">retr0sushi.04@gmail.com</a></li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <footer class="site-footer reveal" style="animation-delay: 0.5s;">
+        <p>thanks for visiting!</p>
+    </footer>
 </body>
 </html>
