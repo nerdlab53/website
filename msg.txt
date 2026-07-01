@@ -1,0 +1,27 @@
+feat: Jirachi theme, light/dark toggle, and Trainer Mode game
+
+Add a Pokémon/Jirachi visual identity across the site plus a playable
+Phaser overworld game.
+
+Site:
+- Apply Jirachi palette as --color-* custom properties (navy/gold/mint/cream)
+- Add light/dark theme toggle (theme.js), persisted in localStorage and
+  applied flash-free via an inline pre-paint script in each page head
+- Light mode = Jirachi-daylight (warm white/gold, navy text); dark mode =
+  night palette. Both checked for WCAG AA contrast
+- Poké Ball entry button that cycles poke/great/mega/ultra ball on hover
+  (pokemon.css)
+
+Game (game/, ported from ariroffe/personal-website, MIT):
+- Reskin to Jirachi palette; rewrite all in-game text to my sections;
+  scrub the original name billboard from the tilemap
+- Jirachi guide companion + signposts that open external links
+- Canvas renderer instead of WebGL (deterministic pixels, no GPU-specific
+  black box behind text)
+- Render readable text with Phaser.Text in the Press Start 2P web font: the
+  bundled bitmap atlas is fully opaque and can't be tinted under Canvas, so
+  bitmapText+setTint rendered faint. Boot gated on document.fonts.load
+- Original WebAudio chiptune (Bulby's music not reused); CREDITS.md updated
+
+Co-Authored-By: himanshu & Claude Opus 4.8 <noreply@anthropic.com>
+
