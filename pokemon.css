@@ -1,0 +1,60 @@
+/* Floating Poké Ball button -> Trainer Mode (the Phaser game in /game/).
+   Hover cycles the ball type (poke -> great -> mega -> ultra); see the inline
+   script in index.html. Colours share the Jirachi palette from style.css. */
+.pkmn-toggle {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 3px solid #181818;
+    cursor: pointer;
+    z-index: 10000;
+    image-rendering: pixelated;
+    --ball-top: #e83b3b;
+    background: linear-gradient(var(--ball-top) 0 47%, #181818 47% 53%, #f5f5f5 53% 100%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+    transition: transform 0.2s ease, --ball-top 0.25s ease;
+}
+.pkmn-toggle.ball-poke  { --ball-top: #e83b3b; } /* Poké  — red   */
+.pkmn-toggle.ball-great { --ball-top: #2f6fd0; } /* Great — blue  */
+.pkmn-toggle.ball-mega  { --ball-top: #3fae6b; } /* Mega  — green */
+.pkmn-toggle.ball-ultra { --ball-top: #f4d03f; } /* Ultra — gold  */
+
+.pkmn-toggle::after { /* centre button */
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    border: 3px solid #181818;
+}
+.pkmn-toggle::before { /* little bobbing Jirachi star cue */
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: -8px;
+    width: 14px;
+    height: 14px;
+    background: #f4d03f;
+    /* 4-point star */
+    clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+    filter: drop-shadow(0 0 3px rgba(244, 208, 63, 0.9));
+    animation: pkmn-bob 1.8s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes pkmn-bob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(20deg); }
+}
+.pkmn-toggle:hover { transform: scale(1.08) rotate(-8deg); }
+.pkmn-toggle:focus-visible { outline: 3px solid #f4d03f; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .pkmn-toggle { transition: none; }
+    .pkmn-toggle::before { animation: none; }
+}

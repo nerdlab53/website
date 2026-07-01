@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>himanshu — trainer mode</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/webp" href="../jirachi.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <style>body { overflow: hidden; margin: 0; }</style>
+</head>
+<body>
+    <div id="loading">
+        <div id="loading-wrapper"><span>Loading Jirachi Route…</span></div>
+    </div>
+    <div id="game-container"></div>
+    <div id="game-menu-container">
+        <img id="pic-circ" src="../jirachi.webp" alt="menu" title="menu" />
+        <ul id="game-menu" style="display: none">
+            <li class="active-link"><a class="game-menu-link" href="#">Quest</a></li>
+            <li><a class="game-menu-link" href="../index.html">Home</a></li>
+            <li><a class="game-menu-link" href="../cv.html">CV / Resume</a></li>
+            <li><a class="game-menu-link" href="../posts.html">Blogs</a></li>
+            <li><a class="game-menu-link" href="https://github.com/nerdlab53">GitHub</a></li>
+        </ul>
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <script src="./index.js" type="module"></script>
+</body>
+</html>

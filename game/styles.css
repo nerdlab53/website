@@ -1,0 +1,59 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #0d1730; }
+
+#loading {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0d1730;
+    color: #F4D03F;
+    font-family: ui-monospace, monospace;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    z-index: 50;
+}
+
+/* keep the pixel art / pixel font crisp when the browser scales the canvas
+   (e.g. on retina / HiDPI displays) instead of bilinear-blurring it */
+#game-container canvas {
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* top-left picture + dropdown menu */
+#game-menu-container { position: fixed; top: 14px; left: 14px; z-index: 60; }
+#pic-circ {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 3px solid #F4D03F;
+    object-fit: cover;
+    cursor: pointer;
+    background: #1B2A4A;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+#pic-circ:hover { transform: scale(1.05); }
+
+#game-menu {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 6px;
+    min-width: 130px;
+    background: #FFF8E7;
+    border: 3px solid #181818;
+    box-shadow: 4px 4px 0 #F4D03F;
+}
+#game-menu a {
+    display: block;
+    padding: 6px 10px;
+    color: #1B2A4A;
+    text-decoration: none;
+    font-family: ui-monospace, monospace;
+    font-weight: 700;
+    font-size: 13px;
+}
+#game-menu a:hover { background: #F4D03F; }
+#game-menu .active-link a { color: #9a7b12; }

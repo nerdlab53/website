@@ -1,16 +1,55 @@
 /* ===== base ===== */
+/* Jirachi palette — single source of truth. Both the normal dark theme and the
+   game (game/scenes/palette.js) share these gold / mint / cream / navy values. */
 :root {
-    --bg: #0d0d0d;
-    --bg-soft: #161616;
-    --bg-card: #141414;
-    --border: #262626;
-    --text: #ffffff;
-    --muted: #9a9a9a;
-    --accent: #00ff85;       /* neon green */
-    --accent-soft: #1e90ff;  /* electric blue */
-    --link: #1e90ff;
-    --link-hover: #ff0099;   /* vivid pink */
+    --color-bg: #16213e;        /* deep starry navy */
+    --color-bg-soft: #1b2a4a;
+    --color-bg-card: #1f3157;   /* card navy, a touch lighter */
+    --color-border: #2c3e6b;    /* indigo border */
+    --color-accent: #f4d03f;    /* Jirachi gold — headings, active nav, borders */
+    --color-hover: #8fe0cc;     /* seafoam mint — link/button/interactive hover */
+    --color-text: #fff8e7;      /* cream body text (AA on navy: ~12:1) */
+    --color-muted: #b9c4dd;     /* muted blue-cream secondary text (~7:1) */
+
+    /* legacy aliases so existing rules keep working from the palette above */
+    --bg: var(--color-bg);
+    --bg-soft: var(--color-bg-soft);
+    --bg-card: var(--color-bg-card);
+    --border: var(--color-border);
+    --text: var(--color-text);
+    --muted: var(--color-muted);
+    --accent: var(--color-accent);       /* gold */
+    --accent-soft: var(--color-accent);  /* section titles / @ → gold */
+    --link: var(--color-accent);         /* links rest = gold */
+    --link-hover: var(--color-hover);    /* links hover = mint */
 }
+
+/* Light mode — Jirachi daylight: warm whites/golds, deep-navy text, blue-green
+   accents. All values chosen to clear WCAG AA on the cream background. */
+html[data-theme="light"] {
+    --color-bg: #fffcf2;        /* warm white */
+    --color-bg-soft: #fbf1d3;   /* soft gold */
+    --color-bg-card: #ffffff;
+    --color-border: #e6d9a8;    /* soft gold border */
+    --color-accent: #8a6300;    /* deep amber-gold — ~5.3:1 on bg */
+    --color-hover: #147a63;     /* Jirachi blue-green — ~5:1 on bg */
+    --color-text: #1b2a4a;      /* deep navy — ~12:1 on bg */
+    --color-muted: #55617f;     /* muted navy — ~5:1 on bg */
+}
+
+/* theme toggle (sits at the end of the nav) */
+.theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1;
+    padding: 0 2px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+}
+.theme-btn:hover { transform: scale(1.15); }
+.theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 * {
     box-sizing: border-box;
@@ -20,7 +59,7 @@ body {
     font-size: 14px;
     line-height: 1.65;
     background-color: var(--bg);
-    background-image: radial-gradient(circle at 50% -20%, rgba(0, 255, 133, 0.06), transparent 60%);
+    background-image: radial-gradient(circle at 50% -20%, rgba(244, 208, 63, 0.08), transparent 60%);
     color: var(--text);
     margin: 80px auto;
     max-width: 900px;
@@ -29,7 +68,7 @@ body {
     position: relative;
     border: 1px solid var(--border);
     border-radius: 10px;
-    box-shadow: 0 0 40px rgba(0, 255, 133, 0.05);
+    box-shadow: 0 0 40px rgba(27, 42, 74, 0.6);
 }
 
 hr {
@@ -91,7 +130,7 @@ img, video, iframe, audio {
 
 .site-nav a:hover,
 .site-nav a.active {
-    color: var(--text);
+    color: var(--accent);
 }
 
 .site-nav a:hover::before,
@@ -177,7 +216,7 @@ img, video, iframe, audio {
     height: 9px;
     border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0, 255, 133, 0.18);
+    box-shadow: 0 0 0 3px rgba(244, 208, 63, 0.22);
 }
 
 .timeline .role {
@@ -220,7 +259,7 @@ img, video, iframe, audio {
 a.card:hover {
     border-color: var(--link-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(255, 0, 153, 0.15);
+    box-shadow: 0 6px 24px rgba(143, 224, 204, 0.18);
 }
 
 .card-title {
@@ -257,8 +296,8 @@ a.card:hover .card-title {
 .card .stack span {
     font-size: 0.72rem;
     color: var(--accent);
-    background: rgba(0, 255, 133, 0.08);
-    border: 1px solid rgba(0, 255, 133, 0.25);
+    background: rgba(244, 208, 63, 0.1);
+    border: 1px solid rgba(244, 208, 63, 0.3);
     border-radius: 5px;
     padding: 1px 7px;
 }
