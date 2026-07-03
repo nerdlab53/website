@@ -8,238 +8,55 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="icon" type="image/png" href="maneki-neko.png">
+    <script>
+        (function () {
+            try { var t = localStorage.getItem('site-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { }
+            if (window.self !== window.top) document.documentElement.classList.add('embedded');
+        })();
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        body {
-            font-family: 'SF Mono', monospace;
-        }
-
-        .math-table {
-            border-collapse: collapse;
-            margin: 15px 0;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .math-table th,
-        .math-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .math-table th {
-            background-color: #f5f5f5;
-        }
-
-        .example-section {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-
+        /* Themed to the shared Jirachi palette; boxes below build on .article. */
+        .example-section,
+        .explanation-section,
+        .circuit-explanation,
+        .example-box,
         .math-formula {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 3px;
-        }
-
-        .example-section {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #1a1a1a;
-            /* Dark background */
-            border-radius: 5px;
-            color: #ffffff;
-            /* Light text for dark background */
-        }
-
-        .math-table {
-            border-collapse: collapse;
-            margin: 15px 0;
-            width: 100%;
-            max-width: 600px;
-            background-color: #2d2d2d;
-            /* Slightly lighter than background */
-        }
-
-        .math-table th,
-        .math-table td {
-            border: 1px solid #444;
-            /* Darker border */
-            padding: 8px;
-            text-align: left;
-        }
-
-        .math-table th {
-            background-color: #363636;
-            /* Slightly lighter than table background */
-            color: #ffffff;
-        }
-
-        .math-formula {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #2d2d2d;
-            /* Slightly lighter than background */
-            border-radius: 3px;
-            color: #ffffff;
-        }
-
-        /* Add styles for lists and links in dark mode */
-        .example-section ul,
-        .example-section ol {
-            color: #ffffff;
-        }
-
-        .example-section a {
-            color: #66b3ff;
-            /* Light blue for links */
-        }
-
-        .explanation-section {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            padding: 2rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            margin: 2rem 0;
+            padding: 1.2rem 1.4rem;
+            margin: 1.4rem 0;
+        }
+
+        .explanation-section > div {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .explanation-section > div:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .question {
-            background-color: #2d2d2d;
-            padding: 1rem;
-            border-left: 4px solid #66b3ff;
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            padding: 0.8rem 1rem;
             margin: 1rem 0;
             font-style: italic;
+            color: var(--muted);
         }
 
-        .concept-block {
-            margin: 2rem 0;
-        }
+        .article strong { color: var(--accent-soft); }
+        .example-box h6 { color: var(--accent-soft); margin-top: 0; }
 
-        .circuit-explanation {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background-color: #2d2d2d;
-            border-radius: 6px;
-        }
-
-        .example-box {
-            background-color: #363636;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-        }
-
-        .example-box h6 {
-            color: #66b3ff;
-            margin-top: 0;
-        }
-
-        .example-box ul {
-            margin: 0.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        h4,
-        h5 {
-            color: #66b3ff;
-            margin-bottom: 1rem;
-        }
-
-        strong {
-            color: #66b3ff;
-        }
-
-        .math-formula {
-            background-color: #2d2d2d;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-        }
-
-        /* Dark mode styles for math formulas and examples */
-        .math-formula {
-            background-color: #2d2d2d;
-            color: #ffffff;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 6px;
-            border: 1px solid #444;
-        }
-
-        .example-box {
-            background-color: #2d2d2d;
-            color: #ffffff;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 6px;
-            border: 1px solid #444;
-        }
-
-        /* MathJax specific dark mode adjustments */
-        .MathJax {
-            color: #ffffff !important;
-        }
-
-        /* Matrix styling in dark mode */
-        .math-formula .MathJax_CHTML {
-            background-color: transparent !important;
-        }
-
-        /* Headings in dark sections */
-        .explanation-section h4,
-        .explanation-section h5 {
-            color: #66b3ff;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Lists in dark sections */
-        .explanation-section ul,
-        .explanation-section ol {
-            color: #ffffff;
-            padding-left: 1.5rem;
-        }
-
-        .explanation-section li {
-            margin: 0.5rem 0;
-        }
-
-        /* Strong text emphasis */
-        .explanation-section strong {
-            color: #66b3ff;
-            font-weight: 600;
-        }
-
-        /* Paragraph text */
-        .explanation-section p {
-            color: #ffffff;
-            line-height: 1.6;
-            margin: 1rem 0;
-        }
-
-        /* Borders and separators */
-        .explanation-section>div {
-            border-bottom: 1px solid #444;
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .explanation-section>div:last-child {
-            border-bottom: none;
-        }
-
-        /* Code blocks if any */
-        .explanation-section code {
-            background-color: #363636;
-            color: #66b3ff;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-        }
+        .MathJax { color: var(--text) !important; }
+        .math-formula .MathJax_CHTML { background-color: transparent !important; }
     </style>
 </head>
 
@@ -252,7 +69,10 @@
         <span class="spacer"></span>
         <a href="https://github.com/nerdlab53">github</a>
         <a href="https://x.com/retr0jirachi">twitter</a>
+        <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle light or dark theme"
+            title="Toggle theme">🌙</button>
     </nav>
+    <article class="article">
     <img src="_ (3).jpeg" alt="P3">
     <br>
     <h2>a dummys questions on the road to mech interp proficiency</h2>
@@ -506,9 +326,12 @@
         </div>
 
     </div>
+    </article>
+    <hr class="reader-hide">
     <footer class="site-footer">
-        <p><a href="./index.html">>> back home</a></p>
+        <p><a href="./posts.html">>> back to blogs</a></p>
     </footer>
+    <script src="theme.js" defer></script>
 </body>
 
 </html>

@@ -7,12 +7,12 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="icon" type="image/png" href="jirachi.webp">
-    <title>>> thoughts</title>
+    <title>>> blogs</title>
     <script>(function () { try { var t = localStorage.getItem('site-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
 </head>
 
 <body>
-    <nav class="site-nav">
+    <nav class="site-nav reveal">
         <a href="./index.html">home</a>
         <a href="./cv.html">cv</a>
         <a href="./posts.html" class="active">blogs</a>
@@ -23,45 +23,98 @@
         <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle light or dark theme"
             title="Toggle theme">🌙</button>
     </nav>
-    <h2 class="section-title">blog posts</h2>
 
-    <article>
-        <h2>hi there!</h2>
-        <small>posted on : 23rd may 2024 | reading time : 5 seconds</small>
-        <p>hi! i will start writing some stuff here, stuff like my thoughts on the current landscape of tech I am
-            interested in, so stay tuned!</p>
-        <hr>
-    </article>
-    <article></article>
-    <h2>i'll be graduating soon</h2>
-    <small>posted on : 7th jan 2025 | reading time : 2 minutes</small>
-    <p>
-        it feels like just yesterday when i was wandering in my college as a freshman, sometimes building stuff in the
-        robotics lab, chilling with my seniors, organizing robotics competitions etc. <br>
-        <br>
-        my college wasn't that great, i mean it's a tier 3 college but i have loved every bit of this life, and I will
-        always be grateful for it as it did provide me with good enough opportunities. <br>
-        <br>
-        even learning ML, although i was alone and no body was doing it at the time, i just used to have fun learning
-        about this interesting field, where the math was so lovable and tell my friends about it and helping them get
-        started themselves. <br>
-        <br>
-        i've met people here who will probably be a part of my life for a long long time and i love all of these guys.
-        <br>
-        <br>
-        it's been one heck of a ride and i'd agree to do it all again in a split second. i've got one last chance to
-        organize the robotics competitions this year, let's see how it goes. <br>
-        <br>
-        one. last. time.
-    </p>
-    <hr>
-    </article>
+    <header class="reveal" style="animation-delay: 0.05s;">
+        <h2 class="section-title">blogs</h2>
+        <p>longer pieces i've written — mostly things i became fascinated by and wanted to understand end to end. click
+            <em>read</em> to open the full article.</p>
+    </header>
 
     <hr>
-    <footer class="site-footer">
+
+    <section class="blog-grid reveal" style="animation-delay: 0.1s;">
+        <article class="blog-card">
+            <figure class="cover"><img src="./blogs/residualstreamsblog/images/image81.png" alt=""></figure>
+            <div class="body">
+                <h3 class="blog-title">residual streams in transformer models</h3>
+                <p class="blog-meta">jan 2025 · ~15 min read</p>
+                <p class="blog-excerpt">what residual streams are, why they matter for interpretability, and how
+                    attention &amp; FFN outputs accumulate into a shared communication channel across layers — worked
+                    through with a concrete "capital of France" example.</p>
+                <a class="btn read-more" href="./blogs/residualstreamsblog/residualstreams.html"
+                    data-post="./blogs/residualstreamsblog/residualstreams.html"
+                    data-title="residual streams in transformer models">read <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="blog-card">
+            <figure class="cover"><img src="./_ (3).jpeg" alt=""></figure>
+            <div class="body">
+                <h3 class="blog-title">a dummy's questions on the road to mech interp</h3>
+                <p class="blog-meta">2024 · ~10 min read</p>
+                <p class="blog-excerpt">beginner questions i worked through while learning mechanistic
+                    interpretability — activation vector spaces, polysemantic neurons, bigrams &amp; skip-trigrams, QK/OV
+                    circuits, and the "no privileged basis" of the residual stream.</p>
+                <a class="btn read-more" href="./mech_interp.html" data-post="./mech_interp.html"
+                    data-title="a dummy's questions on the road to mech interp">read <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="blog-card">
+            <div class="body">
+                <h3 class="blog-title">i'll be graduating soon</h3>
+                <p class="blog-meta">7 jan 2025 · ~2 min read</p>
+                <p class="blog-excerpt">looking back at four years of college — the robotics lab, learning ML alone when
+                    nobody else was, and the people who'll stay in my life long after. one last time.</p>
+                <a class="btn read-more" href="./blogs/graduating.html" data-post="./blogs/graduating.html"
+                    data-title="i'll be graduating soon">read <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="blog-card">
+            <div class="body">
+                <h3 class="blog-title">hi there!</h3>
+                <p class="blog-meta">23 may 2024 · ~1 min read</p>
+                <p class="blog-excerpt">a short hello and a note on what i plan to write about here — thoughts on the
+                    parts of tech i'm currently fascinated by.</p>
+                <a class="btn read-more" href="./blogs/hi-there.html" data-post="./blogs/hi-there.html"
+                    data-title="hi there!">read <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <article class="blog-card">
+            <div class="body">
+                <h3 class="blog-title">the platonic representation hypothesis</h3>
+                <p class="blog-meta">on twitter</p>
+                <p class="blog-excerpt">a thread on the platonic representation hypothesis — how models trained on
+                    different data and modalities seem to converge toward a shared statistical model of reality.</p>
+                <a class="btn read-more" href="https://x.com/retr0jirachi/status/1927263067278098664" target="_blank"
+                    rel="noopener">read on twitter <i class="fas fa-arrow-up-right-from-square"></i></a>
+            </div>
+        </article>
+    </section>
+
+    <hr>
+
+    <footer class="site-footer reveal" style="animation-delay: 0.15s;">
         <p><a href="./index.html">>> back home</a></p>
     </footer>
+
+    <!-- reading modal -->
+    <div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Article reader">
+        <div class="reader-backdrop"></div>
+        <div class="reader-panel">
+            <div class="reader-bar">
+                <span id="reader-title"></span>
+                <button class="reader-close" id="reader-close" type="button">✕ close</button>
+            </div>
+            <iframe id="reader-frame" title="Article" src="about:blank"></iframe>
+        </div>
+    </div>
+
     <script src="theme.js" defer></script>
+    <script src="blog.js" defer></script>
 </body>
 
 </html>

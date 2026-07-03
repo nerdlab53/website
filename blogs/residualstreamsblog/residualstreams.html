@@ -3,11 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Residual Streams in Transformer Models</title>
+    <title>>> residual streams in transformer models</title>
+    <!-- styles.css kept only for its list numbering / bullet rules; site theme layered on top. -->
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="../../jirachi.webp">
+    <script>
+        (function () {
+            try { var t = localStorage.getItem('site-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) { }
+            if (window.self !== window.top) document.documentElement.classList.add('embedded');
+        })();
+    </script>
+    <style>
+        /* Re-theme the Google-Docs export onto the shared Jirachi palette. */
+        body { max-width: 820px; }
+        .doc-content,
+        .doc-content p, .doc-content li, .doc-content span,
+        .doc-content h1, .doc-content h2, .doc-content h3,
+        .doc-content h4, .doc-content h5, .doc-content h6,
+        .doc-content .title, .doc-content .subtitle,
+        .doc-content [class^="c"], .doc-content [class*=" c"] {
+            color: var(--text) !important;
+            font-family: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace !important;
+        }
+        .doc-content a, .doc-content .c15 { color: var(--link) !important; }
+        .doc-content a:hover, .doc-content .c15:hover { color: var(--link-hover) !important; }
+        .doc-content .c8, .doc-content [class*="background"] { background: transparent !important; }
+        .doc-content img { border: 0; }
+        /* Diagrams are black-on-white; invert them in the dark theme (site default). */
+        html:not([data-theme="light"]) .doc-content img { filter: invert(1) hue-rotate(180deg); }
+    </style>
 </head>
-<body class="c24 doc-content">
-    <button class="toggle-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
+<body class="doc-content article">
+    <nav class="site-nav">
+        <a href="../../index.html">home</a>
+        <a href="../../cv.html">cv</a>
+        <a href="../../posts.html" class="active">blogs</a>
+        <a href="../../reading.html">reading</a>
+        <span class="spacer"></span>
+        <a href="https://github.com/nerdlab53">github</a>
+        <a href="https://x.com/retr0jirachi">twitter</a>
+        <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle light or dark theme"
+            title="Toggle theme">🌙</button>
+    </nav>
     <h2 class="c20" id="h.mh62ydye18zw"><span class="c9 c14">Residual Streams in Transformer Models</span></h2>
       <p class="c4"><span class="c16 c9">What are residual streams?</span></p>
       <p class="c2"><span class="c1 c0"></span></p>
@@ -291,13 +330,10 @@
       </ol>
       <p class="c12"><span class="c16 c0">my blog got praised! T^T :</span></p>
       <img src="images/residual_stream.png" alt="Residual Stream Praise" style="max-width: 100%; height: auto; filter: none !important;">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-      <script src="../../themeToggle.js"></script>
-      <hr>
-      <nav style="text-align: center; padding: 20px 0;">
-          <a href="../../index.html">home</a> |
-          <a href="../../cv.html">cv</a> |
-          <a href="../../blogs.html">blogs</a>
-      </nav>
+      <hr class="reader-hide">
+      <footer class="site-footer">
+          <p><a href="../../posts.html">>> back to blogs</a></p>
+      </footer>
+      <script src="../../theme.js" defer></script>
 </body>
 </html>
